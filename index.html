@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Focul Viu — Restaurant & Pizzerie</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0e0d0b;
+  --surface: #161410;
+  --card: #1c1a16;
+  --border: #2a2720;
+  --gold: #c9a84c;
+  --gold-dim: #8a6e2f;
+  --text: #e8e2d6;
+  --muted: #7a7260;
+  --white: #f5f0e8;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+*, *::before, *::after { box-sizing: inherit; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: env(safe-area-inset-top, 0px);
+  left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 48px;
+  background: rgba(14,13,11,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.04em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--text); }
+
+.nav-cta {
+  background: var(--gold);
+  color: var(--bg) !important;
+  padding: 10px 22px;
+  border-radius: 2px;
+  font-weight: 500 !important;
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 48px 80px;
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(to top, rgba(14,13,11,0.95) 0%, rgba(14,13,11,0.4) 60%, rgba(14,13,11,0.2) 100%),
+    url('https://picsum.photos/seed/restaurant1/1600/900') center/cover no-repeat;
+}
+
+.hero-content {
+  max-width: 640px;
+}
+
+.hero-eyebrow {
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(52px, 7vw, 88px);
+  font-weight: 400;
+  line-height: 1.0;
+  color: var(--white);
+  margin-bottom: 24px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.hero-desc {
+  font-size: 15px;
+  color: var(--muted);
+  max-width: 420px;
+  margin-bottom: 40px;
+  line-height: 1.7;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.btn-primary {
+  background: var(--gold);
+  color: var(--bg);
+  padding: 14px 32px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: opacity 0.2s;
+}
+.btn-primary:hover { opacity: 0.85; }
+
+.btn-ghost {
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.2s;
+}
+.btn-ghost:hover { color: var(--gold); }
+
+/* INFO STRIP */
+.info-strip {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 28px 48px;
+  display: flex;
+  gap: 60px;
+  align-items: center;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-label {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  font-weight: 400;
+}
+
+.info-value {
+  font-size: 15px;
+  color: var(--text);
+  font-weight: 400;
+}
+
+.info-sep {
+  width: 1px;
+  height: 36px;
+  background: var(--border);
+  margin-left: auto;
+}
+
+/* SECTIONS */
+section {
+  padding: 100px 48px;
+}
+
+.section-label {
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.14em;
+  font-weight: 500;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-label::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+/* MENU */
+#meniu { background: var(--bg); }
+
+.menu-header {
+  max-width: 520px;
+  margin-bottom: 64px;
+}
+
+.menu-desc {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.menu-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 48px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0;
+}
+
+.tab {
+  padding: 12px 24px;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--muted);
+  cursor: pointer;
+  border: none;
+  background: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: all 0.2s;
+  letter-spacing: 0.04em;
+}
+
+.tab.active {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+
+.menu-panel { display: none; }
+.menu-panel.active { display: block; }
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+}
+
+.menu-item {
+  background: var(--card);
+  padding: 28px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  border: 1px solid var(--border);
+  transition: border-color 0.2s;
+}
+
+.menu-item:hover { border-color: var(--gold-dim); }
+
+.menu-item-info { flex: 1; }
+
+.menu-item-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.menu-item-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 280px;
+}
+
+.menu-item-price {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--gold);
+  white-space: nowrap;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+/* GALERIE */
+#galerie { background: var(--surface); }
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 260px 260px;
+  gap: 2px;
+  margin-top: 48px;
+}
+
+.gallery-item {
+  overflow: hidden;
+  position: relative;
+}
+
+.gallery-item:first-child {
+  grid-row: span 2;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  display: block;
+}
+
+.gallery-item:hover img { transform: scale(1.04); }
+
+/* REZERVARE */
+#rezervare { background: var(--bg); }
+
+.rezervare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+  margin-top: 64px;
+}
+
+.rezervare-info p {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.contact-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-list li {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.contact-list .c-label {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  min-width: 72px;
+  padding-top: 2px;
+}
+
+.contact-list .c-value {
+  font-size: 15px;
+  color: var(--text);
+}
+
+.form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  font-weight: 400;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 14px 16px;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  border-radius: 2px;
+  outline: none;
+  transition: border-color 0.2s;
+  appearance: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--gold-dim);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-group select option { background: var(--card); }
+
+.form-submit {
+  background: var(--gold);
+  color: var(--bg);
+  border: none;
+  padding: 16px 32px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  border-radius: 2px;
+  font-family: 'DM Sans', sans-serif;
+  transition: opacity 0.2s;
+  margin-top: 8px;
+}
+.form-submit:hover { opacity: 0.85; }
+
+/* FOOTER */
+footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.footer-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.footer-links a {
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--text); }
+
+.footer-copy {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* SUCCESS MESSAGE */
+.success-msg {
+  display: none;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid var(--gold-dim);
+  color: var(--gold);
+  padding: 16px 20px;
+  border-radius: 2px;
+  font-size: 14px;
+  margin-top: 16px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  nav { padding: 16px 20px; }
+  .nav-links { display: none; }
+  .hero { padding: 0 20px 60px; }
+  .info-strip { padding: 20px; gap: 24px; flex-wrap: wrap; }
+  .info-sep { display: none; }
+  section { padding: 64px 20px; }
+  .menu-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .gallery-item:first-child { grid-row: span 1; }
+  .rezervare-grid { grid-template-columns: 1fr; gap: 40px; }
+  .form-row { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 24px; text-align: center; padding: 32px 20px; }
+  .footer-links { flex-wrap: wrap; justify-content: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-item img { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Focul Viu</div>
+  <ul class="nav-links">
+    <li><a href="#meniu">Meniu</a></li>
+    <li><a href="#galerie">Galerie</a></li>
+    <li><a href="#rezervare">Rezervări</a></li>
+    <li><a href="#rezervare" class="nav-cta">Rezervă masă</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Gătit cu foc, servit cu suflet</div>
+    <h1>Mâncare<br><em>adevărată,</em><br>fără compromis.</h1>
+    <p class="hero-desc">Carne la grătar pe cărbune, legume de sezon, rețete românești cu influențe mediteraneene. Fiecare farfurie — gătită la comandă.</p>
+    <div class="hero-actions">
+      <a href="#meniu" class="btn-primary">Vezi meniul</a>
+      <a href="#rezervare" class="btn-ghost">Rezervă masă →</a>
+    </div>
+  </div>
+</section>
+
+<!-- INFO STRIP -->
+<div class="info-strip">
+  <div class="info-item">
+    <span class="info-label">Program</span>
+    <span class="info-value">Luni – Vineri: 11:00 – 23:00</span>
+  </div>
+  <div class="info-item">
+    <span class="info-label">Weekend</span>
+    <span class="info-value">Sâmbătă – Duminică: 10:00 – 24:00</span>
+  </div>
+  <div class="info-item">
+    <span class="info-label">Telefon</span>
+    <span class="info-value">+40 721 234 567</span>
+  </div>
+  <div class="info-sep"></div>
+  <div class="info-item">
+    <span class="info-label">Adresă</span>
+    <span class="info-value">Str. Florilor 12, București</span>
+  </div>
+</div>
+
+<!-- MENIU -->
+<section id="meniu">
+  <div class="menu-header">
+    <div class="section-label">Meniu</div>
+    <h2 class="section-title">Preparate din inimă</h2>
+    <p class="menu-desc">Ingrediente locale, furnizori verificați, zero conservanți. Gătit zilnic — ce nu e proaspăt nu ajunge în farfurie.</p>
+  </div>
+
+  <div class="menu-tabs">
+    <button class="tab active" onclick="switchTab('pizza')">Pizza</button>
+    <button class="tab" onclick="switchTab('paste')">Paste</button>
+    <button class="tab" onclick="switchTab('carne')">Carne & Pește</button>
+    <button class="tab" onclick="switchTab('desert')">Deserturi</button>
+    <button class="tab" onclick="switchTab('bauturi')">Băuturi</button>
+  </div>
+
+  <div id="pizza" class="menu-panel active">
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Margherita DOP</div>
+          <div class="menu-item-desc">Sos San Marzano, mozzarella di bufala, busuioc proaspăt, ulei de măsline extravirgin</div>
+        </div>
+        <div class="menu-item-price">38 lei</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Diavola</div>
+          <div class="menu-item-desc">Sos roșii, mozzarella, salam picant nduja, ardei iute, oregano</div>
+        </div>
+        <div class="menu-item-price">46 lei</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Quattro Stagioni</div>
+          <div class="menu-item-desc">Mozzarella, șuncă, ciuperci, anghinare, măsline, sos roșii</div>
+        </div>
+        <div class="menu-item-price">52 lei</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Prosciutto e Funghi</div>
+          <div class="menu-item-desc">Prosciutto crudo 24 luni, ciuperci porcini, mozzarella, trufe negre</div>
+        </div>
+        <div class="menu-item-price">64 lei</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Calzone Classico</div>
+          <div class="menu-item-desc">Pizza pliată cu ricotta, șuncă, mozzarella, sos roșii, ou</div>
+        </div>
+        <div class="menu-item-price">48 lei</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Pizza del Giorno</div>
+          <div class="menu-item-desc">Creația zilei — întreabă chelnerul pentru ingrediente de sezon</div>
+        </div>
+        <div class="menu-item-price">54 lei</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="paste" class="menu-panel">
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Spaghetti Carbonara</div>
+          <div class="menu-item-desc">Paste proaspete, guanciale afumat, gălbenuș de ou, pecorino romano, piper negru</div>
+        </div>
+        <div class="menu-item-price">44 lei</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Tagliatelle al Ragù</div>
+          <div class="menu-item-desc">Paste late, ragù de vită gătit 6 ore, vin roșu, legume de sezon, parmigiano</div>
+        </div>
+        <div class="menu-item-price">52 lei</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Penne all'Arrabbiata</div>
+          <div class="menu-item-desc">Sos San Marzano picant, usturoi, peperoncino, busuioc, pecorino</div>
+        </div>
+        <div class="menu-item-price">36 lei</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Risotto ai Funghi</div>
+          <div class="menu-item-desc">Orez Arborio, ciuperci mixte, unt, parmigiano, vin alb, ulei de trufe</div>
+        </div>
+        <div class="menu-item-price">58 lei</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="carne" class="menu-panel">
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Bistecca alla Fiorentina</div>
+          <div class="menu-item-desc">Vită maturată 30 zile, 400g, rozmarin, usturoi, ulei extravirgin, lămâie</div>
+        </div>
+        <div class="menu-item-price">128 lei</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Branzino al Forno</div>
+          <div class="menu-item-desc">Biban de mare întreg la cuptor, rozmarin, lămâie, capere, legume mediteraneene</div>
+        </div>
+        <div class="menu-item-price">86 lei</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Pollo alla Parmigiana</div>
+          <div class="menu-item-desc">Piept de pui pane, sos roșii, mozzarella topită, parmigiano, busuioc</div>
+        </div>
+        <div class="menu-item-price">62 lei</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Gamberi all'Aglio</div>
+          <div class="menu-item-desc">Creveți tigru, usturoi, unt, vin alb, peperoncino, pătrunjel, pâine croustillantă</div>
+        </div>
+        <div class="menu-item-price">74 lei</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="desert" class="menu-panel">
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Tiramisù della Casa</div>
+          <div class="menu-item-desc">Rețeta casei, mascarpone, savoiardi, espresso, Marsala, cacao Valrhona</div>
+        </div>
+        <div class="menu-item-price">28 lei</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Panna Cotta</div>
+          <div class="menu-item-desc">Cremă de vanilie borbón, coulis de fructe de pădure, mentă proaspătă</div>
+        </div>
+        <div class="menu-item-price">24 lei</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Cannoli Siciliani</div>
+          <div class="menu-item-desc">Aluat crocant prăjit, ricotta dulce, fistic, coajă de portocală confiată</div>
+        </div>
+        <div class="menu-item-price">26 lei</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Gelato Artigianale</div>
+          <div class="menu-item-desc">3 arome la alegere: ciocolată, fistic, stracciatella, lămâie, fructe de pădure</div>
+        </div>
+        <div class="menu-item-price">22 lei</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="bauturi" class="menu-panel">
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Aperol Spritz</div>
+          <div class="menu-item-desc">Aperol, Prosecco, apă tonică, portocală</div>
+        </div>
+        <div class="menu-item-price">32 lei</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Negroni</div>
+          <div class="menu-item-desc">Gin, Campari, Vermouth Rosso, coajă de portocală</div>
+        </div>
+        <div class="menu-item-price">36 lei</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Vin roșu — Chianti DOCG</div>
+          <div class="menu-item-desc">Sangiovese, Toscana, 2019 · pahar 250ml</div>
+        </div>
+        <div class="menu-item-price">28 lei</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Espresso / Cappuccino</div>
+          <div class="menu-item-desc">Blend arabica 100%, prăjit artizanal în Italia</div>
+        </div>
+        <div class="menu-item-price">12 / 16 lei</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIE -->
+<section id="galerie">
+  <div class="section-label">Galerie</div>
+  <h2 class="section-title">Atmosferă & preparate</h2>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="https://picsum.photos/seed/resto-interior/800/900" alt="Interior restaurant">
+    </div>
+    <div class="gallery-item">
+      <img src="https://picsum.photos/seed/resto-grill/800/450" alt="Grătar">
+    </div>
+    <div class="gallery-item">
+      <img src="https://picsum.photos/seed/resto-food2/800/450" alt="Preparate">
+    </div>
+    <div class="gallery-item">
+      <img src="https://picsum.photos/seed/resto-desert/800/450" alt="Deserturi">
+    </div>
+    <div class="gallery-item">
+      <img src="https://picsum.photos/seed/resto-drinks/800/450" alt="Băuturi">
+    </div>
+  </div>
+</section>
+
+<!-- REZERVARE -->
+<section id="rezervare">
+  <div class="section-label">Rezervări</div>
+  <h2 class="section-title">Rezervă masa ta</h2>
+
+  <div class="rezervare-grid">
+    <div class="rezervare-info">
+      <p>Rezervările se fac cu cel puțin 2 ore înainte. Pentru grupuri de peste 10 persoane, te rugăm să ne contactezi telefonic pentru a discuta meniul și aranjamentele speciale.</p>
+      <ul class="contact-list">
+        <li>
+          <span class="c-label">TELEFON</span>
+          <span class="c-value">+40 721 234 567</span>
+        </li>
+        <li>
+          <span class="c-label">EMAIL</span>
+          <span class="c-value">rezervari@focul-viu.ro</span>
+        </li>
+        <li>
+          <span class="c-label">ADRESĂ</span>
+          <span class="c-value">Str. Florilor 12, Sector 1, București</span>
+        </li>
+        <li>
+          <span class="c-label">PROGRAM</span>
+          <span class="c-value">Lu–Vi 11:00–23:00 · Sâ–Du 10:00–24:00</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="form-grid">
+      <div class="form-row">
+        <div class="form-group">
+          <label>NUME</label>
+          <input type="text" placeholder="Ion Popescu">
+        </div>
+        <div class="form-group">
+          <label>TELEFON</label>
+          <input type="tel" placeholder="+40 7xx xxx xxx">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>DATA</label>
+          <input type="date">
+        </div>
+        <div class="form-group">
+          <label>ORA</label>
+          <select>
+            <option value="">Selectează ora</option>
+            <option>11:00</option><option>12:00</option><option>13:00</option>
+            <option>14:00</option><option>15:00</option><option>16:00</option>
+            <option>17:00</option><option>18:00</option><option>19:00</option>
+            <option>20:00</option><option>21:00</option><option>22:00</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>NUMĂR PERSOANE</label>
+        <select>
+          <option>1 persoană</option>
+          <option>2 persoane</option>
+          <option>3 persoane</option>
+          <option>4 persoane</option>
+          <option>5 persoane</option>
+          <option>6 persoane</option>
+          <option>7–10 persoane</option>
+          <option>Grup mare (10+)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>MENȚIUNI</label>
+        <textarea placeholder="Alergii, ocazie specială, preferințe de loc..."></textarea>
+      </div>
+      <button class="form-submit" onclick="submitForm()">Trimite rezervarea</button>
+      <div class="success-msg" id="successMsg">✓ Rezervare trimisă! Te vom contacta în cel mai scurt timp pentru confirmare.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Focul Viu</div>
+  <ul class="footer-links">
+    <li><a href="#meniu">Meniu</a></li>
+    <li><a href="#galerie">Galerie</a></li>
+    <li><a href="#rezervare">Rezervări</a></li>
+  </ul>
+  <div class="footer-copy">© 2024 Focul Viu</div>
+</footer>
+
+<script>
+function switchTab(id) {
+  document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function submitForm() {
+  const msg = document.getElementById('successMsg');
+  msg.style.display = 'block';
+  setTimeout(() => { msg.style.display = 'none'; }, 5000);
+}
+</script>
+</body>
+</html>
